@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CustomerIQ - Executive Power BI Dashboard Preview</title>
+    <!-- Modern Tailwind & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0b0f19; color: #f1f5f9; }
+        .glass-card { background: rgba(18, 24, 38, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .gradient-text { background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="p-6 md:p-10 min-h-screen">
+    <div class="max-w-7xl mx-auto space-y-8">
+        
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-gray-800">
+            <div>
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 text-xs font-semibold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full">Executive BI Report</span>
+                    <span class="text-xs text-gray-400">Power BI Model Preview</span>
+                </div>
+                <h1 class="text-3xl font-extrabold tracking-tight mt-2">
+                    🛍️ Customer<span class="gradient-text">IQ</span> Intelligence & Churn Dashboard
+                </h1>
+                <p class="text-sm text-gray-400 mt-1">End-to-End Enterprise E-Commerce Customer Retention & Revenue Analytics</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    2,463 Active Customer Records
+                </span>
+            </div>
+        </div>
+
+        <!-- KPI Cards Row -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="glass-card rounded-2xl p-5 border-l-4 border-blue-500">
+                <p class="text-xs font-medium uppercase tracking-wider text-gray-400">Total Revenue (GMV)</p>
+                <h3 class="text-2xl font-bold text-white mt-1">₹5.38 Cr</h3>
+                <p class="text-xs text-blue-400 mt-2 font-medium">10,000 Transactions</p>
+            </div>
+            <div class="glass-card rounded-2xl p-5 border-l-4 border-indigo-500">
+                <p class="text-xs font-medium uppercase tracking-wider text-gray-400">Total Customers</p>
+                <h3 class="text-2xl font-bold text-white mt-1">2,463</h3>
+                <p class="text-xs text-indigo-400 mt-2 font-medium">12 Major Cities</p>
+            </div>
+            <div class="glass-card rounded-2xl p-5 border-l-4 border-purple-500">
+                <p class="text-xs font-medium uppercase tracking-wider text-gray-400">Average Order Value</p>
+                <h3 class="text-2xl font-bold text-white mt-1">₹5,380.55</h3>
+                <p class="text-xs text-purple-400 mt-2 font-medium">Across all categories</p>
+            </div>
+            <div class="glass-card rounded-2xl p-5 border-l-4 border-amber-500">
+                <p class="text-xs font-medium uppercase tracking-wider text-gray-400">Overall Churn Rate</p>
+                <h3 class="text-2xl font-bold text-amber-400 mt-1">35.12%</h3>
+                <p class="text-xs text-gray-400 mt-2">865 At-Risk Customers</p>
+            </div>
+            <div class="glass-card rounded-2xl p-5 border-l-4 border-rose-500">
+                <p class="text-xs font-medium uppercase tracking-wider text-gray-400">Revenue at Risk</p>
+                <h3 class="text-2xl font-bold text-rose-400 mt-1">₹1.25 Cr</h3>
+                <p class="text-xs text-rose-300 mt-2 font-medium">High Risk Cohorts</p>
+            </div>
+        </div>
+
+        <!-- Visuals Grid 1 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Category Revenue Donut -->
+            <div class="glass-card rounded-2xl p-6">
+                <h3 class="text-base font-semibold text-white mb-4">Revenue Share by Category</h3>
+                <div class="h-64 flex items-center justify-center">
+                    <canvas id="categoryDonutChart"></canvas>
+                </div>
+            </div>
+
+            <!-- RFM Segments Bar Chart -->
+            <div class="glass-card rounded-2xl p-6 lg:col-span-2">
+                <h3 class="text-base font-semibold text-white mb-4">Customer Segments Distribution & Value</h3>
+                <div class="h-64">
+                    <canvas id="segmentBarChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visuals Grid 2 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- ML Risk Distribution -->
+            <div class="glass-card rounded-2xl p-6">
+                <h3 class="text-base font-semibold text-white mb-4">AI Predicted Churn Risk Tiers</h3>
+                <div class="h-64">
+                    <canvas id="riskTierChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Key Strategic Insights -->
+            <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-semibold text-white mb-3">🎯 Executive Retention Recommendations</h3>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 font-bold">✓</span>
+                            <span><strong>VIP Champions Protection:</strong> 332 VIP customers generate ₹1.42 Cr with 0% churn. Maintain dedicated concierge support.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-rose-400 font-bold">⚠️</span>
+                            <span><strong>High-Spender Win-Back:</strong> 406 "At-Risk" high-spenders account for ₹1.02 Cr revenue. Deliver targeted ₹500 personalized coupons.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-400 font-bold">⚡</span>
+                            <span><strong>Fulfillment Latency:</strong> Delivery delays >3 days increase complaint rate from 8% to 70%. Prioritize tier-2 dispatch hubs.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="pt-4 mt-4 border-t border-gray-800 flex items-center justify-between text-xs text-gray-400">
+                    <span>Model: Gradient Boosting Classifier</span>
+                    <span>ROC-AUC: 1.0000 | Accuracy: 98.4%</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Chart.js Scripts -->
+    <script>
+        // 1. Category Donut
+        const ctxCategory = document.getElementById('categoryDonutChart').getContext('2d');
+        new Chart(ctxCategory, {
+            type: 'doughnut',
+            data: {
+                labels: ['Electronics', 'Fashion', 'Home & Kitchen', 'Beauty', 'Grocery'],
+                datasets: [{
+                    data: [32.45, 8.52, 8.14, 2.97, 1.73],
+                    backgroundColor: ['#3b82f6', '#ec4899', '#8b5cf6', '#10b981', '#f59e0b'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#94a3b8', boxWidth: 12 } }
+                }
+            }
+        });
+
+        // 2. Segment Bar
+        const ctxSegment = document.getElementById('segmentBarChart').getContext('2d');
+        new Chart(ctxSegment, {
+            type: 'bar',
+            data: {
+                labels: ['Loyal', 'At-Risk', 'Lost', 'Champions', 'Potential', 'Newcomers'],
+                datasets: [{
+                    label: 'Customer Count',
+                    data: [740, 406, 401, 332, 317, 267],
+                    backgroundColor: '#6366f1',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+                    y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // 3. Risk Tier Bar
+        const ctxRisk = document.getElementById('riskTierChart').getContext('2d');
+        new Chart(ctxRisk, {
+            type: 'bar',
+            data: {
+                labels: ['Low Risk (Healthy)', 'High Risk (Action Needed)'],
+                datasets: [{
+                    label: 'Customers',
+                    data: [1598, 865],
+                    backgroundColor: ['#10b981', '#ef4444'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+                    y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
